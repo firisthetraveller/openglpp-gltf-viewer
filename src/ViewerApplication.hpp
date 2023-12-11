@@ -59,4 +59,5 @@ private:
     before most of OpenGL function calls.
   */
  bool loadGltfFile(tinygltf::Model& model);
+ std::vector<GLuint> createBufferObjects(const tinygltf::Model &model);
 };
