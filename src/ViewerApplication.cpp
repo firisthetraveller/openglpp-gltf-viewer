@@ -21,6 +21,28 @@ void keyCallback(
   }
 }
 
+bool ViewerApplication::loadGltfFile(tinygltf::Model& model) {
+  static tinygltf::TinyGLTF loader;
+  std::string err;
+  std::string warn;
+
+  bool ret = loader.LoadASCIIFromFile(&model, &err, &warn, m_gltfFilePath.string());
+
+  if (!warn.empty()) {
+    std::cout << "Warn: " << warn << "\n"; 
+  }
+
+  if (!warn.empty()) {
+    std::cout << "Err: " << err << "\n"; 
+  }
+
+  if (!ret) {
+    std::cout << "Failed to parse glTF\n"; 
+  }
+
+  return ret;
+}
+
 int ViewerApplication::run()
 {
   // Loader shaders
@@ -56,7 +78,8 @@ int ViewerApplication::run()
 
   tinygltf::Model model;
   // TODO Loading the glTF file
-
+  bool test = loadGltfFile(model);
+  
   // TODO Creation of Buffer Objects
 
   // TODO Creation of Vertex Array Objects
