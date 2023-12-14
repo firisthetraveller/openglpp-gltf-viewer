@@ -66,11 +66,11 @@ std::vector<GLuint> ViewerApplication::createVertexArrayObjects (
 
   meshIndexToVaoRange.resize(model.meshes.size());
 
-  const GLuint VERTEX_ATTRIB_POSITION_IDX = 0;
-  const GLuint VERTEX_ATTRIB_NORMAL_IDX = 1;
-  const GLuint VERTEX_ATTRIB_TEXCOORD0_IDX = 2;
+  const static GLuint VERTEX_ATTRIB_POSITION_IDX = 0;
+  const static GLuint VERTEX_ATTRIB_NORMAL_IDX = 1;
+  const static GLuint VERTEX_ATTRIB_TEXCOORD0_IDX = 2;
 
-  const std::vector<std::string> LABELS = {"POSITION", "NORMAL", "TEXCOORD0"};
+  const static std::vector<std::string> LABELS = {"POSITION", "NORMAL", "TEXCOORD0"};
 
   for (int i = 0 ; i < 3 ; i++) {
     for(auto& mesh: model.meshes) {
@@ -186,6 +186,10 @@ int ViewerApplication::run()
     // Draw the scene referenced by gltf file
     if (model.defaultScene >= 0) {
       // TODO Draw all nodes
+
+      for (auto& node: model.scenes[model.defaultScene].nodes) {
+        drawNode(node, glm::mat4(1));
+      }
     }
   };
 
